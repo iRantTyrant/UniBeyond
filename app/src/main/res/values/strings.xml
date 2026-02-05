@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">UniBeyond</string>
+    <string name="splash_screen">Welcome to UniBeyond</string>
+    <string name="splash_icon">UniBeyond\'s icon</string>
+    <string name="top_discover">Discover Clubs</string>
+    <string name="top_map">Events Around Me</string>
+    <string name="top_my_clubs">My Clubs</string>
+    <string name="top_profile">Profile</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.unibeyond.data.repository
 
+import javax.inject.Inject
 import com.example.unibeyond.domain.model.Club
 import com.example.unibeyond.domain.model.Expense
 import com.example.unibeyond.domain.repository.ClubRepository
@@ -7,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import kotlin.collections.plus
 
-class FakeClubRepository : ClubRepository {
+class FakeClubRepository @Inject constructor() : ClubRepository {
     //Mock data in mutable list
     private val mockClubs = mutableListOf<Club>(
         //--- Mock Club 1: Photography Club ---

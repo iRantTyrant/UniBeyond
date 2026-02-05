@@ -4,8 +4,9 @@ import com.example.unibeyond.domain.model.User
 import com.example.unibeyond.domain.repository.UserRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
+import javax.inject.Inject
 
-class FakeUserRepository : UserRepository {
+class FakeUserRepository @Inject constructor()  : UserRepository {
     //Mock  user data in list
     private val mockUsers = mutableListOf<User>(
         User(

@@ -6,9 +6,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import java.time.LocalDate
 import java.time.LocalDateTime
+import javax.inject.Inject
 
 
-class FakeEventRepository : EventRepository {
+class FakeEventRepository @Inject constructor() : EventRepository {
 
     //Mock data for events
     private val mockEvents = mutableListOf<Event>(
