@@ -23,6 +23,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.unibeyond.presentation.auth.login.LoginScreen
 import com.example.unibeyond.presentation.components.BottomNavBar
 import com.example.unibeyond.presentation.components.UniTopBar
 import com.example.unibeyond.presentation.navigation.Screen
@@ -61,7 +62,7 @@ fun UniBeyondApp() {
     Scaffold(
         topBar = {
           if (showBottomBar){
-              UniTopBar(currentRoute = currentRoute)
+              UniTopBar(currentRoute = currentRoute, navController = navController)
           }
         },
         bottomBar = {
@@ -85,7 +86,7 @@ fun UniBeyondApp() {
             //Login screen
             //Fake Login button to check the navigation
             composable(Screen.Login.route){
-                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
+                /*Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
                     Button(onClick = {
                         navController.navigate(Screen.Discover.route){
                             popUpTo(Screen.Login.route){
@@ -95,11 +96,13 @@ fun UniBeyondApp() {
                     })
                     {
                         Text(text="Login")
-                    }
-                }
+                    }*/
+                LoginScreen(navController=navController)
+
             }
 
             composable(Screen.Register.route){
+                Text("I am the register screen")
 
             }
 

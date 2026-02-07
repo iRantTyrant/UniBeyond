@@ -6,4 +6,17 @@
     <string name="top_map">Events Around Me</string>
     <string name="top_my_clubs">My Clubs</string>
     <string name="top_profile">Profile</string>
+    <string name="moto">Connect • Create • Collaborate</string>
+    <string name="discover">Discover Clubs</string>
+    <string name="connect">Connect</string>
+    <string name="location">Find Events</string>
+    <string name="welcome_back">Welcome Back!</string>
+    <string name="login_subtitle">Sign in to access your clubs and activities</string>
+    <string name="email">E-mail</string>
+    <string name ="email_placeholder">irant@mail.com</string>
+    <string name ="password">Password</string>
+    <string name = "password_placeholder">••••••</string>
+    <string name = "login_button">Sign In</string>
+    <string name = "no_account">Don\'t have an account?</string>
+    <string name = "sign_up">Sign Up</string>
 </resources>
