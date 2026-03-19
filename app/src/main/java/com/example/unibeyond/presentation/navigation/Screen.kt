@@ -24,7 +24,7 @@ sealed class Screen (val route : String){
     //Screen that shows upcoming events
     object Map : Screen("map_screen")
     //Club Details screen
-    object ClubDetails : Screen("club_details_screen")
+    object ClubDetails : Screen("club_details_screen/{clubId}")
 
 }
 

@@ -24,6 +24,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.unibeyond.presentation.auth.login.LoginScreen
+import com.example.unibeyond.presentation.auth.register.RegisterScreen
+import com.example.unibeyond.presentation.clubs.DiscoverScreen
+import com.example.unibeyond.presentation.clubs.MyClubsScreen
 import com.example.unibeyond.presentation.components.BottomNavBar
 import com.example.unibeyond.presentation.components.UniTopBar
 import com.example.unibeyond.presentation.navigation.Screen
@@ -61,87 +64,74 @@ fun UniBeyondApp() {
 
     Scaffold(
         topBar = {
-          if (showBottomBar){
-              UniTopBar(currentRoute = currentRoute, navController = navController)
-          }
+            if (showBottomBar) {
+                UniTopBar(currentRoute = currentRoute, navController = navController)
+            }
         },
         bottomBar = {
             if (showBottomBar) {
                 BottomNavBar(navController = navController)
             }
         }
-            ){ innerPadding ->
+    ) { innerPadding ->
 
         //NavHost init
         NavHost(
             navController = navController,
             startDestination = Screen.Splash.route,
             modifier = Modifier.padding(innerPadding)
-        ){
+        ) {
             //First Splash screen
-            composable(Screen.Splash.route){
+            composable(Screen.Splash.route) {
                 SplashScreen(navController = navController)
             }
 
             //Login screen
             //Fake Login button to check the navigation
-            composable(Screen.Login.route){
-                /*Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
-                    Button(onClick = {
-                        navController.navigate(Screen.Discover.route){
-                            popUpTo(Screen.Login.route){
-                                inclusive = true
-                            }
-                        }
-                    })
-                    {
-                        Text(text="Login")
-                    }*/
-                LoginScreen(navController=navController)
+            composable(Screen.Login.route) {
+
+                LoginScreen(navController = navController)
 
             }
 
-            composable(Screen.Register.route){
-                Text("I am the register screen")
+            composable(Screen.Register.route) {
+                RegisterScreen(navController = navController)
 
             }
 
-            composable(Screen.Map.route){
-                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
+            composable(Screen.Map.route) {
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                     Text(
-                        text="I am on the map screen"
+                        text = "I am on the map screen"
                     )
                 }
             }
 
-            composable(Screen.Discover.route){
-                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
+            composable(Screen.Discover.route) {
+                DiscoverScreen(navController = navController)
+            }
+
+            composable(Screen.MyClubs.route) {
+                MyClubsScreen(navController = navController)
+            }
+
+            composable(Screen.Profile.route) {
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                     Text(
-                        text="I am on the discover screen"
+                        text = "I am on the profile screen"
                     )
                 }
             }
 
-            composable(Screen.MyClubs.route){
-                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
+            composable(Screen.ClubDetails.route) {
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                     Text(
-                        text="I am on the my clubs screen"
+                        text = "I am on the club details screen"
                     )
                 }
+
+
             }
-
-            composable(Screen.Profile.route){
-                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center){
-                    Text(
-                        text="I am on the profile screen"
-                    )
-                }
-            }
-
-
-
-
-
         }
     }
 }
