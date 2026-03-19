@@ -95,6 +95,7 @@ class FakeClubRepository @Inject constructor() : ClubRepository {
 
     //Get the clubs that the user has joined
     override fun getClubsForUser(userId: String): Flow<List<Club>> {
+        //Filter the clubs that contain the id of the user
         val userClubs = mockClubs.filter { it.memberIds.contains(userId) }
         return flowOf(userClubs)
     }

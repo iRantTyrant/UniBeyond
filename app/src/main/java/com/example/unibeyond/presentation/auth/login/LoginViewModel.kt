@@ -1,53 +1,79 @@
 package com.example.unibeyond.presentation.auth.login
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.unibeyond.domain.repository.AuthRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-//What uiStates we are gonna look at for changes iin the ui
+//Data class to set what a LoginUiState should have
 data class LoginUiState(
-    //-- The regular data we need to check for the auth
     val email : String = "",
     val password : String = "",
-    //--
-
-    //Show or not the password
     val isPasswordVisible : Boolean = false,
-
-    //Check if its loading
     val isLoading : Boolean = false,
-
-    //Check if there is an error
     val error : String? = null,
+    val isSuccess : Boolean = false
 )
 
-class LoginViewModel() : ViewModel() {
-    //The Mutable data the view model can access this to write new data
-    private val _loginUiState = MutableStateFlow(LoginUiState())
+@HiltViewModel //We use inject to build the LoginViewModel with the repository
+class LoginViewModel @Inject constructor(
+    private val repository: AuthRepository
+): ViewModel() {
 
-    //This is what we use in the ui to read the data from the view model when something changes here we recompose
+    private val _loginUiState = MutableStateFlow(LoginUiState())
     val loginUiState : StateFlow<LoginUiState> = _loginUiState.asStateFlow()
 
-    //When  something changes in the Email field we update the state
-    fun onEmailChange(email : String) : Unit{
-        _loginUiState.value = _loginUiState.value.copy(email = email)
+    fun onEmailChange(email : String) {
+        _loginUiState.update { it.copy(email = email) }
     }
 
-    //When  something changes in the Password field we update the state
-    fun onPasswordChange(password : String)  : Unit {
-        _loginUiState.value = _loginUiState.value.copy(password = password)
+    fun onPasswordChange(password : String) {
+        _loginUiState.update { it.copy(password = password) }
     }
 
-    //When  something changes in the Password field we update the state
-    fun onTogglePasswordVisibility() : Unit {
-        _loginUiState.value = _loginUiState.value.copy(isPasswordVisible = !loginUiState.value.isPasswordVisible)
+    fun onTogglePasswordVisibility() {
+        _loginUiState.update { it.copy(isPasswordVisible = !it.isPasswordVisible) }
     }
 
-    //
-    fun onLoginClick(isLoading : Boolean) : Unit {
-        _loginUiState.value = _loginUiState.value.copy(isLoading = isLoading)
+    //Login button click
+    fun onLoginClick() {
+        viewModelScope.launch {
+
+
+            // show loading
+            _loginUiState.update { it.copy(isLoading = true, error = null) }
+
+            // get the data from the ui
+            val emailToSend = _loginUiState.value.email
+            val passwordToSend = _loginUiState.value.password
+
+            // call the repository
+            val result = repository.login(emailToSend, passwordToSend)
+
+            //check if it was a success
+            if (result.isSuccess) {
+                println("Login Successful!")
+                // stop loading
+                _loginUiState.update { it.copy(isLoading = false, isSuccess = true) }
+                //
+            } else {
+                val errorMsg = result.exceptionOrNull()?.message ?: "Unknown Error"
+                println("Error: $errorMsg")
+
+                //Update ui in case of error
+                _loginUiState.update {
+                    it.copy(
+                        isLoading = false,
+                        error = errorMsg
+                    )
+                }
+            }
+        }
     }
-
-
 }

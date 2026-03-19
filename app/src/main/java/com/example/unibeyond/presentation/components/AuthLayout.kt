@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -25,6 +27,7 @@ fun AuthLayout(
     subtitle : String,
     buttonLabel : String,
     buttonFunc : () -> Unit,
+    isLoading:Boolean = false,
     //The content of the form its a composable function that returns nothing
     content : @Composable () -> Unit
 ){
@@ -34,7 +37,8 @@ fun AuthLayout(
     ){padding ->
         Column(
             modifier = Modifier.padding(padding).fillMaxSize()
-                .background(color = MaterialTheme.colorScheme.surfaceBright),
+                .background(color = MaterialTheme.colorScheme.surfaceBright)
+                .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ){
             //First the header

@@ -1,8 +1,10 @@
 package com.example.unibeyond.di
 
+import com.example.unibeyond.data.repository.FakeAuthRepository
 import com.example.unibeyond.data.repository.FakeClubRepository
 import com.example.unibeyond.data.repository.FakeEventRepository
 import com.example.unibeyond.data.repository.FakeUserRepository
+import com.example.unibeyond.domain.repository.AuthRepository
 import com.example.unibeyond.domain.repository.ClubRepository
 import com.example.unibeyond.domain.repository.EventRepository
 import com.example.unibeyond.domain.repository.UserRepository
@@ -36,5 +38,12 @@ abstract class AppModule {
     abstract fun bindClubRepository(
         fakeClubRepository: FakeClubRepository
     ): ClubRepository
+
+    //Binds FakeUserRepository to the interface UserRepository
+    @Binds
+    @Singleton
+    abstract fun bindsAuthRepository(
+        fakeAuthRepository: FakeAuthRepository
+    ): AuthRepository
 }
 
