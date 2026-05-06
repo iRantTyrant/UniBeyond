@@ -25,11 +25,10 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.unibeyond.R
-import com.example.unibeyond.presentation.components.AuthLayout
-import com.example.unibeyond.presentation.components.UniBeyondTextField
+import com.example.unibeyond.presentation.components.auth_components.AuthLayout
+import com.example.unibeyond.presentation.components.generic_components.UniBeyondTextField
 import com.example.unibeyond.presentation.navigation.Screen
 
 @Composable

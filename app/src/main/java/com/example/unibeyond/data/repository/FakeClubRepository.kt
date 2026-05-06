@@ -28,12 +28,16 @@ class FakeClubRepository @Inject constructor() : ClubRepository {
                 Expense(
                     id = "ex1",
                     title = "Photo Lights",
+                    category = "Equipment",
                     amount = 200.0,
+                    date = "2025-01-01"
                 ),
                 Expense(
                     id = "ex2",
                     title = "Photography Supplies",
+                    category = "Expendables",
                     amount = 100.0,
+                    date = "2025-02-01"
                 )
             )
         ),
@@ -53,12 +57,16 @@ class FakeClubRepository @Inject constructor() : ClubRepository {
                 Expense(
                     id = "ex1",
                     title = "Compressor Filter",
-                    amount = 300.0
+                    category = "Expendables",
+                    amount = 300.0,
+                    date = "2025-03-01"
                 ),
                 Expense(
                     id = "ex2",
                     title = "Diving Gear",
-                    amount = 200.0
+                    category = "Equipment",
+                    amount = 200.0,
+                    date = "2025-04-01"
                 )
             )
         ),
@@ -79,7 +87,7 @@ class FakeClubRepository @Inject constructor() : ClubRepository {
                     id = "ex1",
                     title = "Movie Tickets",
                     amount = 500.0,
-                    date = "2023-04-01",
+                    date = "2025-02-01",
                     category = "Entertainment"
                 )
             )

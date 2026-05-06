@@ -21,7 +21,7 @@ class FakeUserRepository @Inject constructor()  : UserRepository {
             interestedEventsIds = listOf("ev1", "ev2"),
             friendsList = listOf("u2", "u3"),
             level = 1,
-            xp = 100
+            xp = 100,
             ),
         User(
             userId = "u2",
@@ -35,7 +35,8 @@ class FakeUserRepository @Inject constructor()  : UserRepository {
             interestedEventsIds = listOf("ev1", "ev3"),
             friendsList = listOf("u1","u3"),
             level = 0 ,
-            xp = 50
+            xp = 50,
+
         ),
         User(
             userId = "u3",
@@ -49,7 +50,8 @@ class FakeUserRepository @Inject constructor()  : UserRepository {
             interestedEventsIds = listOf("ev2"),
             friendsList = listOf("u1","u2"),
             level = 0,
-            xp = 0
+            xp = 0,
+
         )
     )
 

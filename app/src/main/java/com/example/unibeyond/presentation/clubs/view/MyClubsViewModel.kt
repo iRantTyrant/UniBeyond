@@ -1,5 +1,4 @@
-package com.example.unibeyond.presentation.clubs
-
+package com.example.unibeyond.presentation.clubs.view
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -31,7 +30,7 @@ class MyClubsViewModel @Inject constructor(
         .catch { emit(UiState.Error("Error loading your clubs")) }
         .stateIn(
             scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000),
+            started = SharingStarted.Companion.WhileSubscribed(5000),
             initialValue = UiState.Loading
         )
 }

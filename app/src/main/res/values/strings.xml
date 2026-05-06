@@ -32,6 +32,21 @@
     <string name="discover_subtitle">Find clubs that match your interests</string>
     <string name="my_clubs">My Clubs</string>
     <string name="my_clubs_subtitle">Clubs you are a member of</string>
-
+    <string name="club_image">Club Image</string>
+    <string name="join_club">Join Club</string>
+    <string name="leave_club">Leave Club</string>
+    <string name="members">Members</string>
+    <string name="president">President</string>
+    <string name="back">Back</string>
+    <string name="joined">Joined</string>
+    <string name="description">Club Description</string>
+    <string name="user_avatar">User Avatar</string>
+    <string name="upcoming_events">Upcoming Events</string>
+    <string name="events">Events &amp; Activities</string>
+    <string name="budget_used">Budget Used</string>
+    <string name="budget_remaining">Remaining</string>
+    <string name="budget_spent">Spent</string>
+    <string name="budget_total">Total</string>
+    <string name="budget_management">Budget Management</string>"
 
 </resources>

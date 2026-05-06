@@ -1,4 +1,4 @@
-package com.example.unibeyond.presentation.components
+package com.example.unibeyond.presentation.components.generic_components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
