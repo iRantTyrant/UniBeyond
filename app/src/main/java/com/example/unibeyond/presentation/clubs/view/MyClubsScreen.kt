@@ -1,4 +1,4 @@
-package com.example.unibeyond.presentation.clubs
+package com.example.unibeyond.presentation.clubs.view
 
 
 
@@ -18,7 +18,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.unibeyond.R
 import com.example.unibeyond.common.UiState
-import com.example.unibeyond.presentation.components.ClubCard
+import com.example.unibeyond.presentation.components.club_components.ClubCard
 
 @Composable
 fun MyClubsScreen(

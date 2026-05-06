@@ -21,6 +21,11 @@ data class User (
 
     //--Gamification aspect--
     val level : Int = 1,
-    val xp : Int = 0
+    val xp : Int = 0,
 
-    )
+
+    //--Avatar of the user--
+    val avatarUrl : String = ""
+)
+
+

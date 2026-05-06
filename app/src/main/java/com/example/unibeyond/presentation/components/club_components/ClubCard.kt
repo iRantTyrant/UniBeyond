@@ -1,4 +1,4 @@
-package com.example.unibeyond.presentation.components
+package com.example.unibeyond.presentation.components.club_components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,7 +23,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -31,11 +30,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.unibeyond.R
 import com.example.unibeyond.domain.model.Club
+import com.example.unibeyond.presentation.components.generic_components.JoinedRibbon
 
+//A small ClubCard to be shown in the discover screen with minimal info
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ClubCard(
@@ -50,7 +52,6 @@ fun ClubCard(
         onClick = onClubClick,
         modifier = Modifier
             .fillMaxWidth()
-        // Αργότερα εδώ θα βάλουμε και .clickable { ... } για να ανοίγει λεπτομέρειες
     ) {
         Column {
             //iMAGE BOX
@@ -66,27 +67,17 @@ fun ClubCard(
                         .data(club.imageUrl)
                         .crossfade(true)
                         .build(),
-                    contentDescription = "Club Image",
+                    contentDescription = stringResource(R.string.club_image),
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.fillMaxSize()
                 )
 
                 // Show the joined banner if the user is a member
-                if (isJoined) {
-                    Surface(
-                        color = Color(0xFF00C853),
-                        shape = RoundedCornerShape(bottomStart = 8.dp),
-                        modifier = Modifier.align(Alignment.TopEnd)
-                    ) {
-                        Text(
-                            text = "Joined",
-                            color = Color.White,
-                            style = MaterialTheme.typography.labelSmall,
-                            fontWeight = FontWeight.Bold,
-                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp)
-                        )
-                    }
-                }
+                JoinedRibbon(
+                    isJoined = isJoined,
+                    modifier = Modifier
+                        .align(Alignment.TopEnd)
+                )
             }
 
             // Information about the club
@@ -100,11 +91,8 @@ fun ClubCard(
                 )
 
                 // Category
-                Text(
-                    text = club.category,
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.primary
-                )
+                CategoryChip(category = club.category)
+
 
                 Spacer(modifier = Modifier.height(8.dp))
 
@@ -114,7 +102,7 @@ fun ClubCard(
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     maxLines = 2,
-                    overflow = TextOverflow.Ellipsis
+                    overflow = TextOverflow.Ellipsis,
                 )
 
                 Spacer(modifier = Modifier.height(12.dp))
@@ -131,7 +119,7 @@ fun ClubCard(
 
                     //Count all ids in the list
                     Text(
-                        text = "${club.memberIds.size} members",
+                        text = "${club.memberIds.size} ${stringResource(R.string.members)}",
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )

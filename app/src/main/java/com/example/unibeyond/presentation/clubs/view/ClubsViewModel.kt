@@ -1,4 +1,4 @@
-package com.example.unibeyond.presentation.clubs
+package com.example.unibeyond.presentation.clubs.view
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -34,11 +34,7 @@ class ClubsViewModel @Inject constructor(
         .catch {emit(UiState.Error("Error loading clubs"))}//When it doersnt correctly load the UiState is Error
         .stateIn(
             scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000),
+            started = SharingStarted.Companion.WhileSubscribed(5000),
             initialValue = UiState.Loading
         )//Store it in until its destroyed or until its run out (5 seconds)
 }
-
-
-
-

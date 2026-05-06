@@ -1,4 +1,4 @@
-package com.example.unibeyond.presentation.components
+package com.example.unibeyond.presentation.components.auth_components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.example.unibeyond.presentation.components.generic_components.UniBeyondButton
 
 //A layout for the auth screens that uses the same header footers and backgrounds
 @Composable

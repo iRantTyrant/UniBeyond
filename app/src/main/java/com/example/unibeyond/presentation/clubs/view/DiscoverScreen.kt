@@ -1,4 +1,4 @@
-package com.example.unibeyond.presentation.clubs
+package com.example.unibeyond.presentation.clubs.view
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -22,7 +22,7 @@ import com.example.unibeyond.common.UiState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.ui.res.stringResource
 import com.example.unibeyond.R
-import com.example.unibeyond.presentation.components.ClubCard
+import com.example.unibeyond.presentation.components.club_components.ClubCard
 
 
 @Composable

@@ -36,7 +36,7 @@ class FakeEventRepository @Inject constructor() : EventRepository {
             category = "Sports",
             longitude = 40.6192,
             latitude = -74.0345,
-            imageUrl = "https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Fwww.santoriniscubaacademy.com%2Fproduct%2Ftry-scuba%2F&ved=0CBYQjRxqFwoTCPDSyeqWn5IDFQAAAAAdAAAAABAI&opi=89978449",
+            imageUrl = "https://cdn.divessi.com/cached/products/product/TS-P-banner.jpg/600.jpg",
             attendingUserIds = listOf("u1","u3")
         ),
         Event(
