@@ -78,7 +78,7 @@ class FakeClubRepository @Inject constructor() : ClubRepository {
             category = "Entertainment",
             ownerId = "u3",
             memberIds = listOf("u3"),
-            pendingMemberIds = listOf("u2,u1"),
+            pendingMemberIds = listOf("u2","u1"),
             budgetTotal = 1500.0,
             budgetRemaining = 750.0,
             budgetSpent = 750.0,
@@ -160,6 +160,32 @@ class FakeClubRepository @Inject constructor() : ClubRepository {
             budgetSpent = club.budgetSpent + expense.amount,
             budgetRemaining = club.budgetRemaining - expense.amount
         )
+        }
+    }
+
+    //Update budget
+    override suspend fun updateBudget(
+        clubId: String,
+        budget: Double): Result<Unit> {
+        return updateClubState(clubId) { club ->
+            club.copy(
+                budgetTotal = budget,
+                budgetRemaining = budget,
+                budgetSpent = 0.0
+            )
+        }
+    }
+
+    //Add budget
+    override suspend fun addBudget(
+        clubId: String,
+        amount: Double
+    ): Result<Unit> {
+        return updateClubState(clubId) { club ->
+            club.copy(
+                budgetTotal = club.budgetTotal + amount,
+                budgetRemaining = club.budgetRemaining + amount
+            )
         }
     }
 

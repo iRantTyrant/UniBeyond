@@ -33,7 +33,17 @@ fun ClubDetailsScreen(navController: NavController, viewModel: ClubDetailsViewMo
                 val detailsState = state.data
 
                 // Show success state
-                ClubDetailsScreenContent(club = detailsState.club , ownerName = detailsState.ownerName, isCurrentUserMember = detailsState.isCurrentUserMember, members = detailsState.members,events = detailsState.events, onBackClick = { navController.popBackStack() })
+                ClubDetailsScreenContent(club = detailsState.club ,
+                    ownerName = detailsState.ownerName,
+                    isCurrentUserMember = detailsState.isCurrentUserMember,
+                    currentUserId = detailsState.currentUserId,
+                    members = detailsState.members,
+                    events = detailsState.events,
+                    onBackClick = { navController.popBackStack() },
+                    onJoinClick = { viewModel.joinClub() },
+                    onLeaveClick = { viewModel.leaveClub()},
+                    onManageClick = { navController.navigate("manage_club_screen/${detailsState.club.id}")}
+                    )
             }
 
 

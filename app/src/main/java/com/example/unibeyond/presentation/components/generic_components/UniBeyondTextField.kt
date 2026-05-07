@@ -56,8 +56,8 @@ fun UniBeyondTextField(
 
             colors = OutlinedTextFieldDefaults.colors(
                 //Container color
-                focusedContainerColor = MaterialTheme.colorScheme.surfaceContainer, // Ή Color(0xFFF3F3F3)
-                unfocusedContainerColor = MaterialTheme.colorScheme.surfaceContainer, // Ή Color(0xFFF3F3F3)
+                focusedContainerColor = MaterialTheme.colorScheme.surfaceContainer,
+                unfocusedContainerColor = MaterialTheme.colorScheme.surfaceContainer,
 
                 // Border Color
                 focusedBorderColor = Color.Transparent,

@@ -36,6 +36,13 @@ interface ClubRepository {
     //Update Expenses
     suspend fun addExpense(clubId: String, expense : Expense): Result<Unit>
 
+    //Update budget
+    suspend fun updateBudget(clubId: String, budget: Double): Result<Unit>
+
+    //Add budget
+    suspend fun addBudget(clubId: String, amount: Double): Result<Unit>
+
+
     //--Member Management Operations-
     //User asks to join a club
     suspend fun joinClubRequest(clubId: String, userId: String): Result<Unit>
