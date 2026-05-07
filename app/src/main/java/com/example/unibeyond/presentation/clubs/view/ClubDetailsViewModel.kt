@@ -24,7 +24,8 @@ data class ClubDetailsState(
     val ownerName: String ,
     val isCurrentUserMember: Boolean,
     val members : List<User>,
-    val events : List<Event>
+    val events : List<Event>,
+    val currentUserId : String
 )
 @HiltViewModel
 class ClubDetailsViewModel @Inject constructor(
@@ -76,12 +77,41 @@ class ClubDetailsViewModel @Inject constructor(
                         ownerName = ownerName,
                         isCurrentUserMember = isCurrentUserMember,
                         members = members,
-                        events = events
+                        events = events,
+                        currentUserId = currentUserId
                     )
                 )
 
             } else {
                 _uiState.value = UiState.Error("Club not found")
+            }
+        }
+    }
+
+    //Join club method
+    fun joinClub() {
+        val state = _uiState.value
+        if (state is UiState.Success) {
+            val clubId = state.data.club.id
+            viewModelScope.launch {
+                // Get the join club method from the repository
+                clubRepository.joinClubRequest(clubId, currentUserId)
+                // Update the club details after the join request
+                getClubDetails(clubId)
+            }
+        }
+    }
+
+    //Leave club method
+    fun leaveClub() {
+        val state = _uiState.value
+        if (state is UiState.Success) {
+            val clubId = state.data.club.id
+            viewModelScope.launch {
+                // Call the leave club method from  the repository
+                clubRepository.leaveClub(clubId, currentUserId)
+                //Update the UI
+                getClubDetails(clubId)
             }
         }
     }

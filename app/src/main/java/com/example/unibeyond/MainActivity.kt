@@ -18,6 +18,8 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.unibeyond.presentation.auth.login.LoginScreen
 import com.example.unibeyond.presentation.auth.register.RegisterScreen
+import com.example.unibeyond.presentation.clubs.manage.ClubManageScreen
+import com.example.unibeyond.presentation.clubs.manage.ManageClubViewModel
 import com.example.unibeyond.presentation.clubs.view.ClubDetailsScreen
 import com.example.unibeyond.presentation.clubs.view.DiscoverScreen
 import com.example.unibeyond.presentation.clubs.view.MyClubsScreen
@@ -47,18 +49,24 @@ fun UniBeyondApp() {
     val currentBackStackEntry = navController.currentBackStackEntryAsState()
     val currentRoute = currentBackStackEntry.value?.destination?.route
 
-    //A list that shows which screens use the bottom navbar
+    //A list that shows which screens use the bottom and top navbar
     val showBottomBar = currentRoute in listOf(
         Screen.Discover.route,
         Screen.Map.route,
         Screen.MyClubs.route,
         Screen.Profile.route,
-        Screen.ClubDetails.route
     )
+    val showTopBar = currentRoute in listOf(
+        Screen.Discover.route,
+        Screen.Map.route,
+        Screen.MyClubs.route,
+        Screen.Profile.route,
+        Screen.ClubDetails.route,
+        Screen.ManageClub.route)
 
     Scaffold(
         topBar = {
-            if (showBottomBar) {
+            if (showTopBar) {
                 UniTopBar(currentRoute = currentRoute, navController = navController)
             }
         },
@@ -120,6 +128,11 @@ fun UniBeyondApp() {
             composable(Screen.ClubDetails.route) {
                 ClubDetailsScreen(navController = navController)
 
+
+            }
+
+            composable(Screen.ManageClub.route) {
+                ClubManageScreen(navController = navController)
 
             }
         }

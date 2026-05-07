@@ -35,6 +35,8 @@ fun UniTopBar(currentRoute: String?, navController: NavController){
         Screen.Map.route -> stringResource(R.string.top_map)
         Screen.MyClubs.route -> stringResource(R.string.top_my_clubs)
         Screen.Profile.route -> stringResource(R.string.top_profile)
+        Screen.ClubDetails.route -> stringResource(R.string.club_details)
+        Screen.ManageClub.route -> stringResource(R.string.manage_club)
         else -> stringResource(R.string.app_name)
     }
 
@@ -62,5 +64,6 @@ fun UniTopBar(currentRoute: String?, navController: NavController){
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
             containerColor = Color.Transparent
         ),
+
     )
 }

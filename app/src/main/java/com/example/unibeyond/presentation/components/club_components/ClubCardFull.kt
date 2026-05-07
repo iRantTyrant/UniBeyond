@@ -47,8 +47,10 @@ fun ClubCardFull(
     club: Club,
     ownerName: String,
     isCurrentUserMember: Boolean,
+    currentUserId: String,
     members: List<User>,
-    onClubClick: () -> Unit,
+    onJoinClick: () -> Unit,
+    onLeaveClick: () -> Unit,
     isJoined: Boolean
 ) {
     Card(elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
@@ -95,9 +97,13 @@ fun ClubCardFull(
         if (isCurrentUserMember) {
             UniBeyondButton(
                 text = stringResource(R.string.leave_club),
-                onClick = {})
-        } else {
-            UniBeyondButton(text = stringResource(R.string.join_club), onClick = {})
+                onClick = onLeaveClick,)
+        }
+        else if(club.pendingMemberIds.contains(currentUserId)){
+            UniBeyondButton(text = stringResource(R.string.request_pending), onClick = {})
+        }
+        else {
+            UniBeyondButton(text = stringResource(R.string.join_club), onClick = onJoinClick)
         }
 
 
