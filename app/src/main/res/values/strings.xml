@@ -52,7 +52,17 @@
     <string name="manage_club">Manage Club</string>
     <string name="club_details">Club Details</string>
     <string name="details">Details</string>
-    <string name="budget">Budget</string>"
+    <string name="budget">Budget</string>
+    <string name="save">Save</string>
+    <string name="general_information">General Information</string>
+    <string name="club_name">Club Name</string>
+    <string name="image_url">Image URL</string>
+    <string name="category">Category</string>
+    <string name="budget_overwrite">Update Total Budget (Overwrite)</string>
+    <string name="add_budget">Add Extra Funds to Budget</string>
+    <string name="amount">Amount</string>
+    <string name="add_expense">Record New Expense</string>
+    <string name="expenseTitle">Expense Title</string>"
 
 
 </resources>

@@ -18,26 +18,30 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.unibeyond.R
 
-
+//A data class for what an edit field contains so we can pass it from the callers
 data class EditFieldConfig(
     val label: String,
     val value: String,
     val onValueChange: (String) -> Unit,
 )
 
+//An edit card that dynamically allocates fields depending on what the caller wants
 @Composable
 fun EditCard(
     title: String,
     fields: List<EditFieldConfig>,
     onSaveClick: () -> Unit,
-    modifier: Modifier = Modifier
 ){
     Card(elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White),
-        modifier = Modifier.fillMaxWidth().padding(top=16.dp,start=16.dp,end=16.dp)
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 16.dp, start = 16.dp, end = 16.dp)
     ){
         Column(
             modifier = Modifier.padding(16.dp),
@@ -61,7 +65,7 @@ fun EditCard(
             Spacer(modifier = Modifier.height(8.dp))
 
             UniBeyondButton(
-                text = "Save",
+                text = stringResource(R.string.save),
                 onClick = onSaveClick
             )
         }

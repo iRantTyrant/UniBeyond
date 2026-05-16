@@ -20,22 +20,19 @@ fun ClubManageScreen(
     // This is where we look at the uistate
     val uiState by viewModel.uiState.collectAsState()
 
-    // Just so we can use to
-    Scaffold(
-    ) { paddingValues ->
-        // Loading, Success, Error)
-        Box(modifier = Modifier.padding(paddingValues)) {
-            when (val state = uiState) {
-                is UiState.Loading -> {
+    // Loading, Success, Error)
+    Box(modifier = Modifier) {
+        when (val state = uiState) {
+            is UiState.Loading -> {
 
-                }
-                is UiState.Success -> {
-                    // We call the content and give it the view model and nav controller
-                    ClubManageScreenContent(
-                        onBackClick = { navController.popBackStack()},
-                        viewModel = viewModel,
+            }
+            is UiState.Success -> {
+                // We call the content and give it the view model and nav controller
+                ClubManageScreenContent(
+                    onBackClick = { navController.popBackStack() },
+                    viewModel = viewModel,
 
-                        // state = state.data
+                    // state = state.data
                     )
                 }
                 is UiState.Error -> {
@@ -44,4 +41,4 @@ fun ClubManageScreen(
             }
         }
     }
-}
+
