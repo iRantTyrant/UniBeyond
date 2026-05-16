@@ -21,6 +21,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 data class ManageClubState(
@@ -47,6 +49,11 @@ class ManageClubViewModel @Inject constructor(
     var descriptionInput by mutableStateOf("")
     var imageUrlInput by mutableStateOf("")
     var categoryInput by mutableStateOf("")
+    var budgetInput by mutableStateOf("")
+    var amountToAddInput by mutableStateOf("")//For the add budget
+    var expenseTitleInput by mutableStateOf("")//for add expense
+    var expenseAmountInput by mutableStateOf("")//for add expense
+    var expenseCategoryInput by mutableStateOf("")//for the add expense
 
 
     init{
@@ -66,6 +73,7 @@ class ManageClubViewModel @Inject constructor(
                 descriptionInput = club.description
                 imageUrlInput = club.imageUrl
                 categoryInput = club.category
+                budgetInput = club.budgetTotal.toString()
 
                 val owner = userRepository.getUser(club.ownerId).firstOrNull() //get the owner of the club
                 val ownerName = owner?.fullName ?: "Unknown" //get the name of the owner
@@ -231,6 +239,48 @@ class ManageClubViewModel @Inject constructor(
                 category = categoryInput
             )
             updateClub(updatedClub) // call the updateCLub
+        }
+    }
+
+    //Save budget
+    fun onSaveBudgetInfo() {
+        val newBudget = budgetInput.toDoubleOrNull() ?: 0.0
+        updateBudget(newBudget)
+    }
+    
+    //Function for adding budget to the club
+    fun onAddBudget() {
+        val amount = amountToAddInput.toDoubleOrNull() ?: 0.0//If there isnt any amount, set it to 0
+        if(amount > 0.0){
+            addBudget(amount)
+            amountToAddInput = "" // clear the input
+        }
+    }
+    
+    //Function for adding expense to the club
+    fun onAddExpenseClick(){
+        val amount = expenseAmountInput.toDoubleOrNull() ?: 0.0//If there isnt any amount, set it to 0
+
+        //TO get the date
+        val currentLocalDate = LocalDate.now()//Get the current date
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")//Set the format
+        val formattedDate = currentLocalDate.format(formatter)//Format the date
+
+
+        if( expenseTitleInput.isNotBlank() && amount > 0.0){
+            val newExpense = Expense(
+                id = (System.currentTimeMillis()).toString(),//Generation of random id
+                title = expenseTitleInput,
+                category = expenseCategoryInput.ifBlank { "General" },
+                amount = amount,
+                date = formattedDate
+            )
+            addExpense(newExpense)
+
+            //CLear inputs
+            expenseTitleInput = ""
+            expenseAmountInput = ""
+            expenseCategoryInput = ""
         }
     }
 }
