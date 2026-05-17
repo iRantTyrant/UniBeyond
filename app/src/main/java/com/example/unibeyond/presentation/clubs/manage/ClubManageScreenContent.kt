@@ -4,10 +4,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Card
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -16,6 +20,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.unibeyond.R
+import com.example.unibeyond.common.UiState
+import com.example.unibeyond.presentation.components.club_components.MembersTab
 import com.example.unibeyond.presentation.components.generic_components.BackButton
 import com.example.unibeyond.presentation.components.generic_components.EditCard
 import com.example.unibeyond.presentation.components.generic_components.GenericFormTab
@@ -43,6 +49,7 @@ fun ClubManageScreenContent(
 
 
         when (currentTab) {
+            //Tab Details
             0 -> {
                 //Tab : Details
                 GenericFormTab(
@@ -73,14 +80,14 @@ fun ClubManageScreenContent(
                     onSaveClick = { viewModel.onSaveGeneralInfo() }
                 )
             }
+            //Τab Budget
             1 -> {
                 //Tab : Budget
                 Column(modifier = Modifier
                     .fillMaxSize()
-                    .verticalScroll(state = rememberScrollState())
-                    .padding(bottom = 16.dp)){
+                    .verticalScroll(state = rememberScrollState())){
                     //Back button
-                    BackButton(onClick = onBackClick, modifier = Modifier.padding(start = 16.dp))
+                    BackButton(onClick = onBackClick, modifier = Modifier.padding(start = 16.dp,top = 16.dp))
                     //First Card : Budget overwrite
                     EditCard(
                         title = stringResource(R.string.budget_overwrite),
@@ -129,7 +136,22 @@ fun ClubManageScreenContent(
                 }
 
             }
-            2 -> Text(text = "Budget")
+            //Tab members
+            2 -> {
+                //get current uiState
+                val uiStateValue = viewModel.uiState.collectAsState().value
+
+                //check if uistate is success
+                if (uiStateValue is UiState.Success){
+                    MembersTab(
+                        state = uiStateValue.data,
+                        viewModel = viewModel,
+                        onBackClick = onBackClick
+                    )
+                } else {
+                    CircularProgressIndicator()
+                }
+            }
             3 -> Text(text = "eVENTSSSS")
         }
     }
