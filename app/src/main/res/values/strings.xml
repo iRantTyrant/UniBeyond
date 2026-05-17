@@ -62,7 +62,11 @@
     <string name="add_budget">Add Extra Funds to Budget</string>
     <string name="amount">Amount</string>
     <string name="add_expense">Record New Expense</string>
-    <string name="expenseTitle">Expense Title</string>"
+    <string name="expenseTitle">Expense Title</string>
+    <string name="pending_members">Pending Requests\n</string>
+    <string name="remove_member">Remove Member</string>
+    <string name="accept_member">Accept Member</string>
+    <string name="decline_member">Decline Member</string>"
 
 
 </resources>

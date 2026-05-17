@@ -146,6 +146,7 @@ fun ClubCardFull(
                     },
                 tint = Color.Unspecified
             )
+
             //Column containing the text and number for the members
             Column() {
                 Text(
