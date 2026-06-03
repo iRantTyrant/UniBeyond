@@ -42,7 +42,7 @@
     <string name="description">Club Description</string>
     <string name="user_avatar">User Avatar</string>
     <string name="upcoming_events">Upcoming Events</string>
-    <string name="events">Events &amp; Activities</string>
+    <string name="events">Events</string>
     <string name="budget_used">Budget Used</string>
     <string name="budget_remaining">Remaining</string>
     <string name="budget_spent">Spent</string>
