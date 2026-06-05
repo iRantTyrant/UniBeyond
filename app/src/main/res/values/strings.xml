@@ -66,7 +66,12 @@
     <string name="pending_members">Pending Requests\n</string>
     <string name="remove_member">Remove Member</string>
     <string name="accept_member">Accept Member</string>
-    <string name="decline_member">Decline Member</string>"
+    <string name="decline_member">Decline Member</string>
+    <string name="following_the_user">Following the user</string>
+    <string name="not_following_the_user">Not following the user</string>
+    <string name="follow_mode_explanation">Tap on the user puck on the map to disable / enable the camera following the user on the map</string>
+    <string name="test_text">Lorem ipsum</string>
+    "
 
 
 </resources>

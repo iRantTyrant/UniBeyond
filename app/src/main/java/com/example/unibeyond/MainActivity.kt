@@ -23,7 +23,7 @@ import com.example.unibeyond.presentation.clubs.manage.ClubManageScreen
 import com.example.unibeyond.presentation.clubs.view.ClubDetailsScreen
 import com.example.unibeyond.presentation.clubs.view.DiscoverScreen
 import com.example.unibeyond.presentation.clubs.view.MyClubsScreen
-import com.example.unibeyond.presentation.components.event_components.MyMap
+import com.example.unibeyond.presentation.components.event_components.UniBeyondMap
 import com.example.unibeyond.presentation.components.generic_components.BottomNavBar
 import com.example.unibeyond.presentation.components.generic_components.UniTopBar
 import com.example.unibeyond.presentation.navigation.Screen
@@ -105,7 +105,7 @@ fun UniBeyondApp() {
             }
 
             composable(Screen.Map.route) {
-                MyMap()
+                UniBeyondMap()
             }
 
             composable(Screen.Discover.route) {
