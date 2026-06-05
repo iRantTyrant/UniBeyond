@@ -35,7 +35,7 @@ fun ClubManageScreenContent(
     onBackClick: () -> Unit,
     ){
 
-    val titles = listOf(stringResource(R.string.details), stringResource(R.string.budget), stringResource(R.string.members), stringResource(R.string.events))
+    val titles = listOf(stringResource(R.string.details), stringResource(R.string.budget), stringResource(R.string.members))
     var currentTab by remember { mutableStateOf(0) }
 
     Column(
@@ -152,7 +152,6 @@ fun ClubManageScreenContent(
                     CircularProgressIndicator()
                 }
             }
-            3 -> Text(text = "eVENTSSSS")
         }
     }
 }

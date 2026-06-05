@@ -1,5 +1,6 @@
 package com.example.unibeyond
 
+
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -19,20 +20,22 @@ import androidx.navigation.compose.rememberNavController
 import com.example.unibeyond.presentation.auth.login.LoginScreen
 import com.example.unibeyond.presentation.auth.register.RegisterScreen
 import com.example.unibeyond.presentation.clubs.manage.ClubManageScreen
-import com.example.unibeyond.presentation.clubs.manage.ManageClubViewModel
 import com.example.unibeyond.presentation.clubs.view.ClubDetailsScreen
 import com.example.unibeyond.presentation.clubs.view.DiscoverScreen
 import com.example.unibeyond.presentation.clubs.view.MyClubsScreen
+import com.example.unibeyond.presentation.components.event_components.UniBeyondMap
 import com.example.unibeyond.presentation.components.generic_components.BottomNavBar
 import com.example.unibeyond.presentation.components.generic_components.UniTopBar
 import com.example.unibeyond.presentation.navigation.Screen
 import com.example.unibeyond.presentation.splash.SplashScreen
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         enableEdgeToEdge()
         setContent {
             UniBeyondApp()
@@ -102,11 +105,7 @@ fun UniBeyondApp() {
             }
 
             composable(Screen.Map.route) {
-                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    Text(
-                        text = "I am on the map screen"
-                    )
-                }
+                UniBeyondMap()
             }
 
             composable(Screen.Discover.route) {
