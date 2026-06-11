@@ -21,8 +21,8 @@ class FakeEventRepository @Inject constructor() : EventRepository {
             date = "2026-02-15T18:00",
             locationName = "Main Hall",
             category = "Showcase",
-            longitude = 40.6892,
-            latitude = -74.0445,
+            longitude = 21.743546,
+            latitude = 38.257926,
             imageUrl = "https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Ftemple-news.com%2Ftylers-reimagined-pyramid-club-gallery-enters-final-exhibition-month%2F&ved=0CBYQjRxqFwoTCMDpuo2Wn5IDFQAAAAAdAAAAABAI&opi=89978449",
             attendingUserIds =listOf("u2")
         ),
@@ -34,8 +34,8 @@ class FakeEventRepository @Inject constructor() : EventRepository {
             date = "2026-02-16T10:00",
             locationName = "Pool facilities",
             category = "Sports",
-            longitude = 40.6192,
-            latitude = -74.0345,
+            longitude = 21.738488,
+            latitude = 38.243058,
             imageUrl = "https://cdn.divessi.com/cached/products/product/TS-P-banner.jpg/600.jpg",
             attendingUserIds = listOf("u1","u3")
         ),
@@ -47,8 +47,8 @@ class FakeEventRepository @Inject constructor() : EventRepository {
             date = "2026-02-17T21:00",
             locationName = "Cinema Hall",
             category = "Entertainment",
-            longitude = 40.6892,
-            latitude = -74.0445,
+            longitude = 21.730591,
+            latitude = 38.246429,
             imageUrl = "https://www.google.com/url?sa=t&source=web&rct=j&url=https%3A%2F%2Fwww.sortiraparis.com%2Fel%2Fchobi%2Ffestival-kinimatografou%2Fguides%2F79140-oi-pio-anamenomenes-tainies-tes-anoixes-tou-2026-stous-kinematographous&ved=0CBYQjRxqFwoTCKCZ94OZn5IDFQAAAAAdAAAAABAI&opi=89978449",
             attendingUserIds = listOf("u1")
 

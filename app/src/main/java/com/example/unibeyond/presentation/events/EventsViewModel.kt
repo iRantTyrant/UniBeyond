@@ -32,5 +32,6 @@ class EventsViewModel @Inject constructor(
             started = SharingStarted.WhileSubscribed(5000),
             initialValue = UiState.Loading
         )//Keep the data stored in the viewmodel until its destroyed or until its run out (5 seconds)
+
 }
 
