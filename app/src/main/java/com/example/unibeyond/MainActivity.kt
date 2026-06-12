@@ -26,6 +26,8 @@ import com.example.unibeyond.presentation.clubs.view.MyClubsScreen
 import com.example.unibeyond.presentation.components.event_components.UniBeyondMap
 import com.example.unibeyond.presentation.components.generic_components.BottomNavBar
 import com.example.unibeyond.presentation.components.generic_components.UniTopBar
+import com.example.unibeyond.presentation.events.manage.EventsEditScreen
+import com.example.unibeyond.presentation.events.view.EventDetailsScreen
 import com.example.unibeyond.presentation.navigation.Screen
 import com.example.unibeyond.presentation.splash.SplashScreen
 import dagger.hilt.android.AndroidEntryPoint
@@ -65,7 +67,9 @@ fun UniBeyondApp() {
         Screen.MyClubs.route,
         Screen.Profile.route,
         Screen.ClubDetails.route,
-        Screen.ManageClub.route)
+        Screen.ManageClub.route,
+        Screen.EventDetails.route,
+        Screen.EventEdit.route)
 
     Scaffold(
         topBar = {
@@ -105,7 +109,7 @@ fun UniBeyondApp() {
             }
 
             composable(Screen.Map.route) {
-                UniBeyondMap()
+                UniBeyondMap(navController= navController)
             }
 
             composable(Screen.Discover.route) {
@@ -134,6 +138,16 @@ fun UniBeyondApp() {
                 ClubManageScreen(navController = navController)
 
             }
+
+            composable(Screen.EventEdit.route){
+                EventsEditScreen()
+            }
+
+            composable(Screen.EventDetails.route){
+                EventDetailsScreen(navController)
+            }
+
+
         }
     }
 }

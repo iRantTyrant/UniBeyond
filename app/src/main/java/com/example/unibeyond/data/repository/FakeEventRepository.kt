@@ -18,7 +18,7 @@ class FakeEventRepository @Inject constructor() : EventRepository {
             eventName = "Photography Exhibition",
             description = "Join us for a showcase of our latest photography techniques",
             clubId = "c1",
-            date = "2026-02-15T18:00",
+            date = "2026-10-15T18:00",
             locationName = "Main Hall",
             category = "Showcase",
             longitude = 21.743546,
@@ -31,7 +31,7 @@ class FakeEventRepository @Inject constructor() : EventRepository {
             eventName = "Try Scuba!",
             description = "Come have a try at scuba diving",
             clubId = "c2",
-            date = "2026-02-16T10:00",
+            date = "2026-10-16T10:00",
             locationName = "Pool facilities",
             category = "Sports",
             longitude = 21.738488,
@@ -56,7 +56,25 @@ class FakeEventRepository @Inject constructor() : EventRepository {
     )
 
     override fun getEvents(): Flow<List<Event>> {
-       return flowOf(mockEvents)
+        //Get time
+        val now = LocalDateTime.now()
+
+        // filter mockEvents
+        val activeEvents = mockEvents.filter { event ->
+            try {
+                // Transform  String to LocalDateTime
+                val eventDate = LocalDateTime.parse(event.date)
+
+                // Keep the event ONLY if its date is after today (or equal)
+                eventDate.isAfter(now) || eventDate.isEqual(now)
+            } catch (e: Exception) {
+                // If a mock event has an invalid date format, return false
+                false
+            }
+        }
+
+        // Return the filtered list within a Flow
+        return flowOf(activeEvents)
     }
 
     override fun getEventsForClub(clubId: String): Flow<List<Event>> {
@@ -81,6 +99,8 @@ class FakeEventRepository @Inject constructor() : EventRepository {
             }
         )
     }
+
+
 
     override fun getPastEventsForClub(clubId: String): Flow<List<Event>> {
         val now = LocalDateTime.now()

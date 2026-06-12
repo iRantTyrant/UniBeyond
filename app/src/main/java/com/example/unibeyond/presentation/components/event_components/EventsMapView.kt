@@ -5,7 +5,10 @@ import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -16,6 +19,9 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CardElevation
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarHost
@@ -27,6 +33,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -38,6 +45,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavController
 import com.example.unibeyond.R
 import com.example.unibeyond.common.UiState
 import com.example.unibeyond.presentation.events.EventsViewModel
@@ -73,10 +81,13 @@ import org.maplibre.compose.util.ClickResult
 import org.maplibre.spatialk.geojson.toJson
 import org.maplibre.compose.expressions.dsl.const
 import org.maplibre.compose.expressions.dsl.image
+import org.maplibre.compose.expressions.dsl.eq
+import org.maplibre.compose.expressions.dsl.get
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @SuppressLint("LocalContextGetResourceValueCall")
 @Composable
-fun UniBeyondMap(viewModel: EventsViewModel = hiltViewModel()) {
+fun UniBeyondMap(viewModel: EventsViewModel = hiltViewModel(),navController: NavController) {
     val context = LocalContext.current
 
     //The uiState that holds the data coming from the EventsViewModel
@@ -139,16 +150,21 @@ fun UniBeyondMap(viewModel: EventsViewModel = hiltViewModel()) {
 
     //A launched effect that follows the user. Enabled by default so the camera can pan to the user
     //NOTE : There is something similar in the MapLibre library called TrackingEffect but it didn't work for me
-    LaunchedEffect(locationState.location,followUser) {
-        if(followUser) {
-            //This keeps the app from crashing until or when we have the location
-            if (locationState.location?.position?.value != null) {
+    // 🌟 Το νέο, πιο "έξυπνο" LaunchedEffect για να μην χάνεται η τοποθεσία
+    LaunchedEffect(locationState.location, followUser) {
+        if (followUser) {
+            val userPosition = locationState.location?.position?.value
+
+            // Εκτυπώνουμε στο Logcat για να δούμε αν η MapLibre βλέπει όντως το GPS
+            println("System.out -> MapLibre Location Check: $userPosition")
+
+            if (userPosition != null) {
                 cameraState.animateTo(
                     finalPosition = CameraPosition(
-                        target = locationState.location?.position?.value!!,
-                        zoom = 15.0,
+                        target = userPosition,
+                        zoom = 16.0, // Λίγο πιο κοντινό zoom για να φαίνεται αμέσως η γειτονιά σου
                     ),
-                    duration = 5.seconds
+                    duration = 3.seconds
                 )
             }
         }
@@ -188,10 +204,10 @@ fun UniBeyondMap(viewModel: EventsViewModel = hiltViewModel()) {
             //--Launched Effect to inform user how to disable or enable the follow mode--
 
             //Variable that remembers if we have selected something or not
-            var isSelectedEventOnMap by remember {mutableStateOf<Boolean>(false)}
+            var isSelectedEventOnMap by rememberSaveable() {mutableStateOf<Boolean>(false)}
 
             //Variable that remembers the selected eventId
-            var selectedEventId by remember {mutableStateOf<String?>(null)}
+            var selectedEventId by rememberSaveable() {mutableStateOf<String?>(null)}
 
             //-------------Box that holds the map it's contents and all composables we want to show on top of the map---------------
             Box(Modifier.fillMaxSize()) {//We use a box to stack elements on top of each other
@@ -215,8 +231,6 @@ fun UniBeyondMap(viewModel: EventsViewModel = hiltViewModel()) {
                         rememberGeoJsonSource(
                             data = GeoJsonData.Features(featureCollection)
                         )
-
-
 
                     val marker = painterResource(R.drawable.baseline_location_pin_24)
                     //The user on the map indicated by a puck
@@ -250,6 +264,11 @@ fun UniBeyondMap(viewModel: EventsViewModel = hiltViewModel()) {
                         }
 
                     )
+
+
+                    //Filter through which marker is selected
+
+                    //The symbol Layer
                     SymbolLayer(
                         id = "events-layers",
                         source = eventsLocations,
@@ -266,6 +285,7 @@ fun UniBeyondMap(viewModel: EventsViewModel = hiltViewModel()) {
                             selectedEventId = clickedFeature?.properties?.get("eventId")?.jsonPrimitive?.content
                             ClickResult.Consume
                         },
+
                     )
                     //Draw layers for the Markers using the featureCollection as a source
 
@@ -314,33 +334,64 @@ fun UniBeyondMap(viewModel: EventsViewModel = hiltViewModel()) {
                 ) {
                     //Check if we have a selected Event
                     if(!isSelectedEventOnMap) {
-                        Text(
-                            text = stringResource(R.string.event_scrollable_list),
-                            style = MaterialTheme.typography.titleMedium,
-                            modifier = Modifier.padding(top = 15.dp, start = 15.dp)
-                        )
-                        LazyColumn(Modifier.padding(15.dp),) {
+                        Row(horizontalArrangement = Arrangement.SpaceBetween,
+                            modifier= Modifier.fillMaxWidth()
+                                .padding(start = 15.dp , end = 15.dp)) {
+                            Text(
+                                text = stringResource(R.string.event_scrollable_list),
+                                style = MaterialTheme.typography.titleMedium,
+                                modifier = Modifier.padding(top = 15.dp, start = 15.dp)
+                            )
+                            IconButton(
+                                onClick = {navController.navigate("edit_events_screen")},
+                                content = {Icon(
+                                    painter = painterResource(R.drawable.outline_edit_location_24),
+                                    contentDescription = stringResource(R.string.add_remove_events),
+                                )}
+                            )
+                        }
+                        LazyColumn(Modifier.padding(start=15.dp,end=15.dp)) {
                             for (event in state.data) {
-                                item { EventItem(event) }
+                                item { EventItem(event,
+                                    modifier=Modifier.clickable{
+                                        navController.navigate("event_details_screen/${event.eventId}")
+                                    }) }
                             }
                         }
                     }
                     else {
 
-                        Text(
-                            text = stringResource(R.string.selected_event),
-                            style = MaterialTheme.typography.titleMedium,
-                            modifier = Modifier.padding(top = 15.dp, start = 15.dp)
+                        Row(horizontalArrangement = Arrangement.SpaceBetween,
+                            modifier= Modifier.fillMaxWidth()
+                                .padding(start = 15.dp , end = 15.dp)) {
+                            Text(
+                                text = stringResource(R.string.selected_event),
+                                style = MaterialTheme.typography.titleMedium,
+                                modifier = Modifier.padding(top = 15.dp, start = 15.dp)
 
-                        )
+                            )
+                            IconButton(
+                                onClick = { isSelectedEventOnMap = false },
+                                content = {
+                                    Icon(
+                                        painter = painterResource(R.drawable.rounded_arrow_back_24),
+                                        contentDescription = stringResource(R.string.return_to_event_list)
+                                    )
+                                }
+                            )
+                        }
+
                         //Filter through all events
                         val eventsToShow = remember(state.data,selectedEventId){
                             state.data.filter{it.eventId == selectedEventId}
                         }
 
-                        LazyColumn(Modifier.padding(15.dp),) {
+                        LazyColumn(Modifier.padding(start=15.dp,end=15.dp)) {
                             for(event in eventsToShow){
-                                item{EventItem(event)}
+                                item{EventItem(event,
+                                    modifier=Modifier.clickable{
+                                    navController.navigate("event_details_screen/${event.eventId}")
+                                })}
                             }
                         }
 

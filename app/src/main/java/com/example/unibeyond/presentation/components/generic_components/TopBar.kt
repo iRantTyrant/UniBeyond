@@ -37,6 +37,8 @@ fun UniTopBar(currentRoute: String?, navController: NavController){
         Screen.Profile.route -> stringResource(R.string.top_profile)
         Screen.ClubDetails.route -> stringResource(R.string.club_details)
         Screen.ManageClub.route -> stringResource(R.string.manage_club)
+        Screen.EventDetails.route-> stringResource(R.string.event_details)
+        Screen.EventEdit.route-> stringResource(R.string.manage_events)
         else -> stringResource(R.string.app_name)
     }
 
