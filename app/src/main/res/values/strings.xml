@@ -75,6 +75,15 @@
     <string name="failed_to_fetch_events">Failed to fetch Events</string>
     <string name="event_scrollable_list">Event Scrollable List</string>
     <string name="selected_event">Selected event</string>
+    <string name="add_event">Add Event</string>
+    <string name="add_remove_events">Add / Remove events</string>
+    <string name="return_to_event_list">Return to Event List</string>
+    <string name="event_details">Event Details</string>
+    <string name="manage_events">Manage Events</string>
+    <string name="attending">Attending</string>
+    <string name="attend">Attend</string>
+    <string name="event_description">Event Description</string>
+    <string name="attendees">Attendees</string>
     "
 
 

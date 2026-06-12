@@ -28,6 +28,12 @@ sealed class Screen (val route : String){
 
     //Manage club screen
     object ManageClub : Screen("manage_club_screen/{clubId}")
+
+    //EventDetails screen
+    object EventDetails : Screen("event_details_screen/{eventId}")
+
+    //Event edit screen
+    object EventEdit : Screen("edit_events_screen")
 }
 
 

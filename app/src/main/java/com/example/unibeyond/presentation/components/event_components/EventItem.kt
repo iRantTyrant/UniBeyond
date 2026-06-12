@@ -29,9 +29,9 @@ import androidx.compose.ui.unit.dp
 import com.example.unibeyond.domain.model.Event
 
 @Composable
-fun EventItem(event: Event, modifier: Modifier= Modifier) {
+fun EventItem(event: Event, modifier: Modifier=Modifier) {
     Card(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp),
         shape = RoundedCornerShape(12.dp),
